@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3000" # port forwarding
+    volumes:
+      - /app/node_modules # don't symlink the node_modules
+      - .:/app # symlink everything else for hot reloading
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["yarn", "test"]
