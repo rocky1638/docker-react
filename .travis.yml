@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t rocky1638/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run rocky1638/docker-react yarn test -- --coverage # coverage option so the command acc exits
